@@ -108,8 +108,32 @@ function Study() {
         );
     };
 
+    const NotEnoughCards = () => {
+        return (
+            <div className='card'>
+                <div className='card-body'>
+                    <h2>Not enough cards.</h2>
+                    <p>You need at least 3 cards to study. There are {deck.cards.length} cards in this deck.</p>
+                    <Link to={`/decks/${deckId}/cards/new`}>
+                        <button className='btn btn-primary'>Add Cards</button>
+                    </Link>
+                </div>
+            </div>
+        );
+    };
+
+
     // if the deck is not loaded, it will display a loading message
     if (isLoaded) {
+        if (deck.cards.length < 3) {
+            return (
+                <div>
+                    <Breadcrumb />
+                    <h1>Study: {deck.name}</h1>
+                    <NotEnoughCards />
+                </div>
+            );
+        } else {
         if (isDone) {
 
             // if the deck is done, it will display the end card
@@ -131,6 +155,7 @@ function Study() {
                 </div>
             );
         }
+    }
     } else {
 
         // if the deck is not loaded, it will display a loading message
