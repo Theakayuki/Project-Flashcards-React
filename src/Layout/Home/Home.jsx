@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 function Home({ decks }) {
     return (
         <div className='home'>
-            <button className='btn btn-secondary'>{'\uFF0B'}Create Deck</button>
+            <Link to='/decks/new' className='btn btn-secondary mb-2'>
+                <i className='bi bi-plus-lg'></i> Create Deck
+            </Link>
+
             <div>
                 {decks.map((deck) => (
                     <div key={deck.id} className='card'>
