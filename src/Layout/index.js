@@ -34,14 +34,14 @@ function Layout() {
                         <Home decks={decks}/>
                     </Route>
 
-                    {/* New Deck page */}
-                    <Route path='/decks/new'>
-                        <NewDeck />
+                    {/* Edit Card page */}
+                    <Route path='/decks/:deckId/cards/:cardId/edit'>
+                        <EditCard />
                     </Route>
 
-                    {/* Deck page */}
-                    <Route path='/decks/:deckId'>
-                        <Deck />
+                    {/* New Card page */}
+                    <Route path='/decks/:deckId/cards/new'>
+                        <NewCard />
                     </Route>
 
                     {/* Edit Deck page */}
@@ -54,14 +54,14 @@ function Layout() {
                         <Study />
                     </Route>
 
-                    {/* New Card page */}
-                    <Route path='/decks/:deckId/cards/new'>
-                        <NewCard />
+                    {/* New Deck page */}
+                    <Route path='/decks/new'>
+                        <NewDeck />
                     </Route>
 
-                    {/* Edit Card page */}
-                    <Route path='/decks/:deckId/cards/:cardId/edit'>
-                        <EditCard />
+                    {/* Deck page */}
+                    <Route path='/decks/:deckId'>
+                        <Deck />
                     </Route>
 
                     {/* Finally if no path is found */}
