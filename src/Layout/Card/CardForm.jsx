@@ -1,7 +1,6 @@
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function CardFrom({ deckId, cardData, changeHandler, handleSubmit}) {
-    const history = useHistory();
     return (
         <form onSubmit={handleSubmit}>
             <div className='form-group'>

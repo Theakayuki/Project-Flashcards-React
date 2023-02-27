@@ -1,8 +1,9 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { readDeck, updateDeck } from '../../../utils/api';
 
 import { Link } from 'react-router-dom';
+import DeckForm from '../DeckForm';
 
 function EditDeck() {
     const { deckId } = useParams();
@@ -58,46 +59,12 @@ function EditDeck() {
     return (
         <div>
             <Breadcrumb />
-            <h2>Create Deck</h2>
-            <form onSubmit={handleSubmit}>
+            <h2>Edit Deck</h2>
                 {isLoaded ? (
-                    <Fragment>
-                        <div className='form-group'>
-                            <label htmlFor='name'>Name</label>
-                            <input
-                                type='text'
-                                className='form-control'
-                                name='name'
-                                id='name'
-                                value={deckData.name}
-                                onChange={changeHandler}
-                                required
-                            />
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor='description'>Description</label>
-                            <textarea
-                                className='form-control'
-                                name='description'
-                                id='description'
-                                placeholder='Brief description of the deck'
-                                rows='3'
-                                value={deckData.description}
-                                onChange={changeHandler}
-                                required
-                            ></textarea>
-                        </div>
-                    </Fragment>
+                    <DeckForm formData={deckData} changeHandler={changeHandler} handleSubmit={handleSubmit} />
                 ) : (
                     <p>Loading...</p>
                 )}
-                <Link to={`/decks/${deckId}`} className='btn btn-secondary'>
-                    Cancel
-                </Link>
-                <button type='submit' className='btn btn-primary ml-3'>
-                    Submit
-                </button>
-            </form>
         </div>
     );
 }
