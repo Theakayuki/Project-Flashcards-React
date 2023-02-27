@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams, useRouteMatch } from 'react-router-dom';
 
 import DeleteButton from '../../utils/DeleteButton/DeleteButton';
 import { readDeck } from '../../utils/api';
@@ -9,6 +9,7 @@ function Deck() {
     const [isLoaded, setIsLoaded] = useState(false);
     const deckId = useParams().deckId;
     const history = useHistory();
+    const { url } = useRouteMatch();
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -33,7 +34,9 @@ function Deck() {
         history.push(`/decks/${deckId}/study`);
     };
 
-
+    const handleCardEdit = (cardId) => {
+        history.push(`${url}/cards/${cardId}/edit`);
+    };
     const Breadcrumb = () => {
         return (
             <nav aria-label='breadcrumb'>
@@ -82,7 +85,7 @@ function Deck() {
                             <div className='col-6'>{card.back}</div>
                         </div>
                         <div className='d-flex justify-content-end'>
-                            <button className='btn btn-secondary'>Edit</button>
+                            <button className='btn btn-secondary' onClick={() => handleCardEdit(card.id)}>Edit</button>
                             <DeleteButton className='ml-2' type={'card'} id={card.id} />
                         </div>
                     </div>

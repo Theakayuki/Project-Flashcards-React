@@ -27,7 +27,10 @@ function Home() {
                 {decks.map((deck) => (
                     <div key={deck.id} className='card'>
                         <div className='card-body'>
+                            <div className='d-flex justify-content-between'>
                             <h5 className='card-title'>{deck.name}</h5>
+                            <p className='card-text'>{deck.cards.length} cards</p>
+                            </div>
                             <p className='card-text'>{deck.description}</p>
                             <div className='d-flex justify-content-between'>
                                 <div>

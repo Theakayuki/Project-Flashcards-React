@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-function CardFrom({ deckId, cardData, changeHandler, handleSubmit}) {
+function CardFrom({ cardData, changeHandler, handleSubmit}) {
+    const deckId = useParams().deckId;
+    // check if url has has cardId to know if it is edit or new card
+    const isEdit = useParams().cardId;
     return (
         <form onSubmit={handleSubmit}>
             <div className='form-group'>
@@ -30,7 +33,7 @@ function CardFrom({ deckId, cardData, changeHandler, handleSubmit}) {
                 ></textarea>
             </div>
             <Link to={`/decks/${deckId}`} className='btn btn-secondary mr-2'>
-                Done
+                {!isEdit ? 'Done' : 'Cancel'}
             </Link>
             <button type='submit' className='btn btn-primary'>
                 Save

@@ -37,6 +37,7 @@ function NewCard() {
         history.go(0);
     };
 
+    console.log(deckId);
     const Breadcrumb = () => {
         return (
             <nav aria-label='breadcrumb'>
@@ -63,7 +64,7 @@ function NewCard() {
                 <Fragment>
                     <Breadcrumb />
                     <h2>{deckData.name}: Add Card</h2>
-                    <CardFrom deckId={deckId} cardData={cardData} changeHandler={changeHandler} handleSubmit={handleSubmit} />
+                    <CardFrom cardData={cardData} changeHandler={changeHandler} handleSubmit={handleSubmit} />
                 </Fragment>
             ) : (
                 <p>Loading...</p>
