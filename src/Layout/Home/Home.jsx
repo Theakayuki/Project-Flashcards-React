@@ -1,6 +1,22 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-function Home({ decks }) {
+import { Link } from 'react-router-dom';
+import DeleteButton from '../../utils/DeleteButton/DeleteButton';
+import { listDecks } from '../../utils/api';
+
+function Home() {
+    // State for the decks
+    const [decks, setDecks] = useState([]);
+
+    // loading the initial decks from the API
+    useEffect(() => {
+        // Using an IIFE to avoid a warning about useEffect not being able to return a promise
+        (async () => {
+            const response = await listDecks();
+            setDecks(response);
+        })();
+    }, []);
+
     return (
         <div className='home'>
             <Link to='/decks/new' className='btn btn-secondary mb-2'>
@@ -29,7 +45,7 @@ function Home({ decks }) {
                                     </Link>
                                 </div>
                                 <div>
-                                    <button className='btn btn-danger' onClick={()=> window.alert('Should we delete this deck?\n \nYou will not be able to recover this Deck.')}>Delete</button>
+                                    <DeleteButton id={deck.id} type='deck' shouldReload={true} />
                                 </div>
                             </div>
                         </div>

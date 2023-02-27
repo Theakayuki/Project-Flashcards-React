@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { listDecks } from '../utils/api';
 import EditCard from './Card/EditCard/EditCard';
 import NewCard from './Card/NewCard/NewCard';
 import Deck from './Deck/Deck';
@@ -13,17 +12,6 @@ import Home from './Home/Home';
 import NotFound from './NotFound';
 
 function Layout() {
-  // State for the decks
-  const [decks, setDecks] = useState([]);
-
-  // loading the initial decks from the API
-  useEffect(() => {
-    // Using an IIFE to avoid a warning about useEffect not being able to return a promise
-    (async () => {
-      const response = await listDecks();
-      setDecks(response);
-    })()
-  }, []);
     return (
         <Fragment>
             <Header />
@@ -31,7 +19,7 @@ function Layout() {
                 <Switch>
                     {/* Home page */}
                     <Route exact path='/'>
-                        <Home decks={decks}/>
+                        <Home />
                     </Route>
 
                     {/* Edit Card page */}

@@ -75,7 +75,7 @@ function NewDeck() {
                 <Link to='/' className='btn btn-secondary'>
                     Cancel
                 </Link>
-                <button type='submit' className='btn btn-primary'>
+                <button type='submit' className='btn btn-primary ml-3'>
                     Submit
                 </button>
             </form>

@@ -99,7 +99,7 @@ function Study() {
                                 Flip
                             </button>
                             {isFront ? null : (
-                                <button className='btn btn-primary' onClick={handleNext}>
+                                <button className='btn btn-primary ml-3' onClick={handleNext}>
                                     Next
                                 </button>
                             )}

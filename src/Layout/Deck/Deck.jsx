@@ -1,8 +1,96 @@
+import { Fragment, useEffect, useState } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
-function Deck(){
+import DeleteButton from '../../utils/DeleteButton/DeleteButton';
+import { readDeck } from '../../utils/api';
 
-    const tempContent = <h2>From Deck</h2>;
-    return tempContent;
+function Deck() {
+    const [deck, setDeck] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false);
+    const deckId = useParams().deckId;
+    const history = useHistory();
+
+    useEffect(() => {
+        const abortController = new AbortController();
+        async function loadDeck() {
+            const loadedDeck = await readDeck(deckId, abortController.signal);
+            setDeck(loadedDeck);
+            setIsLoaded(true);
+        }
+
+        loadDeck();
+    }, [deckId]);
+
+    const handleDeckEdit = () => {
+        history.push(`/decks/${deckId}/edit`);
+    };
+
+
+    const Breadcrumb = () => {
+        return (
+            <nav aria-label='breadcrumb'>
+                <ol className='breadcrumb'>
+                    <li className='breadcrumb-item'>
+                        <Link to='/'>
+                            <i className='bi bi-house-door-fill'></i>Home
+                        </Link>
+                    </li>
+                    <li className='breadcrumb-item active' aria-current='page'>
+                        {deck.name}
+                    </li>
+                </ol>
+            </nav>
+        );
+    };
+
+    const DeckSummery = () => {
+        return (
+            <div>
+                <h3>{deck.name}</h3>
+                <p>{deck.description}</p>
+                <div className='d-flex justify-content-between'>
+                    <div>
+                        <button className='btn btn-secondary' onClick={handleDeckEdit}>Edit</button>
+                        <button className='btn btn-primary ml-2'>Study</button>
+                        <button className='btn btn-primary ml-2'>Add Cards</button>
+                    </div>
+                    <div>
+                        <DeleteButton type={'deck'} id={deck.id} shouldReload={false} />
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    const CardList = () => {
+        return (
+            <Fragment>
+            <h2>Cards</h2>
+            {deck.cards.map((card) => (
+                <div className='card' key={card.id}>
+                    <div className='card-body'>
+                        <div className='row mb-2'>
+                            <div className='col-6'>{card.front}</div>
+                            <div className='col-6'>{card.back}</div>
+                        </div>
+                        <div className='d-flex justify-content-end'>
+                            <button className='btn btn-secondary'>Edit</button>
+                            <DeleteButton className='ml-2' type={'card'} id={card.id} />
+                        </div>
+                    </div>
+                </div>
+            ))}
+            </Fragment>
+        );
+    };
+
+    return (
+        <Fragment>
+            <Breadcrumb />
+            <DeckSummery />
+            {isLoaded && <CardList />}
+        </Fragment>
+    );
 }
 
 export default Deck;
