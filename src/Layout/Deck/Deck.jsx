@@ -25,6 +25,14 @@ function Deck() {
         history.push(`/decks/${deckId}/edit`);
     };
 
+    const handleCardAdd = () => {
+        history.push(`/decks/${deckId}/cards/new`);
+    };
+
+    const handleStudy = () => {
+        history.push(`/decks/${deckId}/study`);
+    };
+
 
     const Breadcrumb = () => {
         return (
@@ -51,8 +59,8 @@ function Deck() {
                 <div className='d-flex justify-content-between'>
                     <div>
                         <button className='btn btn-secondary' onClick={handleDeckEdit}>Edit</button>
-                        <button className='btn btn-primary ml-2'>Study</button>
-                        <button className='btn btn-primary ml-2'>Add Cards</button>
+                        <button className='btn btn-primary ml-2' onClick={handleStudy}>Study</button>
+                        <button className='btn btn-primary ml-2' onClick={handleCardAdd}>Add Cards</button>
                     </div>
                     <div>
                         <DeleteButton type={'deck'} id={deck.id} shouldReload={false} />
