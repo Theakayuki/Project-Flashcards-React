@@ -1,8 +1,8 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Link, useHistory, useParams, useRouteMatch } from 'react-router-dom';
 
-import DeleteButton from '../../utils/DeleteButton/DeleteButton';
 import { readDeck } from '../../utils/api';
+import DeleteButton from '../DeleteButton/DeleteButton';
 
 function Deck() {
     const [deck, setDeck] = useState({});

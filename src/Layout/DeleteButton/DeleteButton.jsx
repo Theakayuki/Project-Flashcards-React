@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { deleteCard, deleteDeck } from "../api";
+import { deleteCard, deleteDeck } from "../../utils/api";
 
 import { useHistory } from "react-router-dom";
 

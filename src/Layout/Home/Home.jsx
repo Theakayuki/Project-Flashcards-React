@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import DeleteButton from '../../utils/DeleteButton/DeleteButton';
 import { listDecks } from '../../utils/api';
+import DeleteButton from '../DeleteButton/DeleteButton';
 
 function Home() {
     // State for the decks
