@@ -1,11 +1,17 @@
 import { Link, useParams } from 'react-router-dom';
 
-function CardFrom({ cardData, changeHandler, handleSubmit}) {
+function CardFrom({ cardData, changeHandler, submitHandler}) {
     const deckId = useParams().deckId;
     // check if url has has cardId to know if it is edit or new card
     const isEdit = useParams().cardId;
+
+    // const formSubmitHandler = (event) => {
+    //     event.preventDefault();
+    //     submitHandler();
+    // };
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={submitHandler}>
             <div className='form-group'>
                 <label htmlFor='front'>Front</label>
                 <textarea

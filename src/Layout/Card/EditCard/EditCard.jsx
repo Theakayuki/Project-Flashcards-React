@@ -1,8 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { readCard, readDeck, updateCard } from "../../../utils/api";
+import { Fragment, useEffect, useState } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { readCard, readDeck, updateCard } from '../../../utils/api';
 
-import CardFrom from "../CardForm";
+import CardFrom from '../CardForm';
 
 function EditCard() {
     const { deckId, cardId } = useParams();
@@ -42,10 +42,11 @@ function EditCard() {
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        await updateCard(cardId, cardData);
+        const test = await updateCard(cardData);
+        console.log(test);
+        setCardData({ front: '', back: '' });
         history.push(`/decks/${deckId}`);
     };
-
 
     const Breadcrumb = () => {
         return (
@@ -72,7 +73,11 @@ function EditCard() {
             <Breadcrumb />
             <h1>Edit Card</h1>
             {isLoaded ? (
-                <CardFrom cardData={cardData} changeHandler={changeHandler} submitHandler={submitHandler} />
+                <CardFrom
+                    cardData={cardData}
+                    changeHandler={changeHandler}
+                    submitHandler={submitHandler}
+                />
             ) : (
                 <p>Loading...</p>
             )}

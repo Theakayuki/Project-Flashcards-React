@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
 import { readDeck } from '../../../utils/api';
 
@@ -9,6 +9,7 @@ function Study() {
     const [isFront, setIsFront] = useState(true);
     const [isDone, setIsDone] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const history = useHistory();
 
     const deckId = useParams().deckId;
 
@@ -35,7 +36,11 @@ function Study() {
             setCurrentCard(currentCard + 1);
             setIsFront(true);
         } else {
-            setIsDone(true);
+            if (window.confirm('Restart cards?')) {
+                handleRestart();
+            } else {
+                history.push('/');
+            }
         }
     };
 
