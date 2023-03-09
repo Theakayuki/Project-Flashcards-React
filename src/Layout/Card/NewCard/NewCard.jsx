@@ -32,9 +32,10 @@ function NewCard() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await createCard(deckId, cardData);
+        const response = await createCard(deckId, cardData);
         setCardData(initialState);
         history.go(0);
+        console.log(response);
     };
 
     console.log(deckId);
@@ -64,7 +65,7 @@ function NewCard() {
                 <Fragment>
                     <Breadcrumb />
                     <h2>{deckData.name}: Add Card</h2>
-                    <CardFrom cardData={cardData} changeHandler={changeHandler} handleSubmit={handleSubmit} />
+                    <CardFrom cardData={cardData} changeHandler={changeHandler} submitHandler={handleSubmit} />
                 </Fragment>
             ) : (
                 <p>Loading...</p>
